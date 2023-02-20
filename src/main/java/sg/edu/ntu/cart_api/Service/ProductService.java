@@ -37,7 +37,9 @@ public class ProductService {
 	}
 	
 	public Product createNewProduct(Product product) {
-		if(product.getDescription().isBlank() || product.getName().isBlank() || product.getPrice() == 0) {
+		if(product.getDescription().isBlank() || product.getName().isBlank() || 
+			product.getPrice() == 0 || product.getDescription() == null ||
+			product.getName() == null) {
 			throw new NullPointerException("Fields cannot be blank!");
 		}
 		product.setId(++id);
