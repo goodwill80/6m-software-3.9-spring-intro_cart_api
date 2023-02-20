@@ -50,13 +50,15 @@ public class ProductController {
 	
 
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
-	public @ResponseBody Product editProduct(@RequestBody Product product, @PathVariable Long id) {
+	public String editProduct(@RequestBody Product product, @PathVariable Long id) {
 		Product productSearch = productList.stream()
 							.filter((prod)-> prod.getId() == id)
 							.findFirst()
 							.orElse(null);
 		productList.set(productList.indexOf(productSearch), product);
-		return productList.get(productList.indexOf(product));
+		Product finalProduct = productList.get(productList.indexOf(product));
+		
+		return "The product - " + finalProduct.getName() + " with id of " + finalProduct.getId() + " has been successfully updated!";
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)

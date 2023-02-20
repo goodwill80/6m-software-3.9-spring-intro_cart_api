@@ -1,6 +1,5 @@
 package sg.edu.ntu.cart_api.Entity;
 
-import org.springframework.stereotype.Component;
 
 
 public class Product {
