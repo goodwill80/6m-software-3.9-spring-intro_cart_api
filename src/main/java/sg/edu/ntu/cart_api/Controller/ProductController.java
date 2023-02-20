@@ -34,13 +34,18 @@ public class ProductController {
 	
 
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public String findById(@PathVariable int id) {
-		return "Get /products/" + id  + " is being called";
+	public @ResponseBody Product findById(@PathVariable int id) {
+		Product productSearch = productList.stream()
+				.filter((prod)-> prod.getId() == id)
+				.findFirst()
+				.orElse(null);
+		return productSearch;
 	}
 	
 
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody Product create(@RequestBody Product product) {
+		productList.add(product);
 		return product;
 	}
 	
@@ -61,13 +66,9 @@ public class ProductController {
 				.filter((prod)-> prod.getId() == id)
 				.findFirst()
 				.orElse(null);
-		
 		productList.remove(productList.indexOf(productSearch));
-		
 		return "Product with " + id +  " has been successfully removed!";
 	}
-	
-	
 	
 	
 }
